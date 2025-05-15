@@ -5,8 +5,8 @@
 #include "nrf_gpio.h"
 #include "nrf_delay.h"
 #include "spi_driver.h"
-#include "CC1101_regs.h"
-#include "CC1101.h"
+#include "cc1101_regs.h"
+#include "cc1101.h"
 #include "nrf_log.h"
 
 uint8_t Init_CC1101(CC1101_t *cc1101, bool serial_mode_en)

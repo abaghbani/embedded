@@ -2,7 +2,7 @@ PROJECT_NAME     := spi_pca10056
 TARGETS          := nrf52840_xxaa
 OUTPUT_DIRECTORY := _build
 
-SDK_ROOT := ~/sdk/nRF5_SDK_17.1
+SDK_ROOT := /home/akbar/sdk/nRF5_SDK_17.1
 PROJ_DIR := ..
 LIB_DIR := ../../../lib
 
@@ -43,7 +43,7 @@ SRC_FILES += \
   $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_uarte.c \
   $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_timer.c \
   $(LIB_DIR)/spi/spi_driver.c \
-  $(LIB_DIR)/CC1101/CC1101.c \
+  $(LIB_DIR)/cc1101/cc1101.c \
   $(LIB_DIR)/somfy/somfy.c \
   $(LIB_DIR)/hormann/hormann.c \
   $(LIB_DIR)/timer/timer.c \
@@ -54,7 +54,7 @@ SRC_FILES += \
 INC_FOLDERS += \
   $(PROJ_DIR) \
   $(LIB_DIR)/spi \
-  $(LIB_DIR)/CC1101 \
+  $(LIB_DIR)/cc1101 \
   $(LIB_DIR)/somfy \
   $(LIB_DIR)/hormann \
   $(LIB_DIR)/timer \
@@ -103,7 +103,7 @@ CFLAGS += -DFLOAT_ABI_HARD
 CFLAGS += -DNRF52840_XXAA
 CFLAGS += -mcpu=cortex-m4
 CFLAGS += -mthumb -mabi=aapcs
-CFLAGS += -Wall -Werror
+CFLAGS += -Wall
 CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 # keep every function in a separate section, this allows linker to discard unused ones
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing
