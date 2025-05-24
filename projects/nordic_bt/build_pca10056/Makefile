@@ -1,83 +1,69 @@
-PROJECT_NAME     := direct_test_mode_pca10056
-TARGETS          := nrf52840_xxaa
+TARGETS          := output
 OUTPUT_DIRECTORY := _build
 
-SDK_ROOT := F:/Tools/NordicSdk/nRF5_SDK_17.1.0_ddde560
-PROJ_DIR := ..
+SDK_ROOT := /home/akbar/sdk/nRF5_SDK_17.1
 
-$(OUTPUT_DIRECTORY)/nrf52840_xxaa.out: \
-  LINKER_SCRIPT  := direct_test_mode_gcc_nrf52.ld
+LINKER_SCRIPT := direct_test_mode_gcc_nrf52.ld
 
-# Source files common to all targets
-SRC_FILES += \
-  $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf52840.S \
-  $(SDK_ROOT)/components/libraries/log/src/nrf_log_frontend.c \
-  $(SDK_ROOT)/components/libraries/log/src/nrf_log_str_formatter.c \
-  $(SDK_ROOT)/components/libraries/util/app_error.c \
-  $(SDK_ROOT)/components/libraries/util/app_error_handler_gcc.c \
-  $(SDK_ROOT)/components/libraries/util/app_error_weak.c \
-  $(SDK_ROOT)/components/libraries/fifo/app_fifo.c \
-  $(SDK_ROOT)/components/libraries/uart/app_uart_fifo.c \
-  $(SDK_ROOT)/components/libraries/util/app_util_platform.c \
-  $(SDK_ROOT)/components/libraries/util/nrf_assert.c \
-  $(SDK_ROOT)/components/libraries/atomic/nrf_atomic.c \
-  $(SDK_ROOT)/components/libraries/balloc/nrf_balloc.c \
-  $(SDK_ROOT)/external/fprintf/nrf_fprintf.c \
-  $(SDK_ROOT)/external/fprintf/nrf_fprintf_format.c \
-  $(SDK_ROOT)/components/libraries/memobj/nrf_memobj.c \
-  $(SDK_ROOT)/components/libraries/ringbuf/nrf_ringbuf.c \
-  $(SDK_ROOT)/components/libraries/strerror/nrf_strerror.c \
-  $(SDK_ROOT)/components/boards/boards.c \
-  $(SDK_ROOT)/integration/nrfx/legacy/nrf_drv_uart.c \
-  $(SDK_ROOT)/modules/nrfx/drivers/src/prs/nrfx_prs.c \
-  $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_uart.c \
-  $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_uarte.c \
-  $(PROJ_DIR)/ble_dtm/ble_dtm_hw_nrf52.c \
-  $(PROJ_DIR)/ble_dtm/ble_dtm.c \
-  $(PROJ_DIR)/main.c \
-  $(SDK_ROOT)/modules/nrfx/mdk/system_nrf52840.c \
+SRC_FILES := $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf52840.S
+SRC_FILES += $(SDK_ROOT)/components/libraries/log/src/nrf_log_frontend.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/log/src/nrf_log_str_formatter.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/util/app_error.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/util/app_error_handler_gcc.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/util/app_error_weak.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/fifo/app_fifo.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/util/app_util_platform.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/util/nrf_assert.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/uart/app_uart_fifo.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/uart/retarget.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/atomic/nrf_atomic.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/balloc/nrf_balloc.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/memobj/nrf_memobj.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/ringbuf/nrf_ringbuf.c
+SRC_FILES += $(SDK_ROOT)/components/libraries/strerror/nrf_strerror.c
+SRC_FILES += $(SDK_ROOT)/components/boards/boards.c
+SRC_FILES += $(SDK_ROOT)/external/fprintf/nrf_fprintf.c
+SRC_FILES += $(SDK_ROOT)/external/fprintf/nrf_fprintf_format.c
+SRC_FILES += $(SDK_ROOT)/integration/nrfx/legacy/nrf_drv_uart.c
+SRC_FILES += $(SDK_ROOT)/modules/nrfx/drivers/src/prs/nrfx_prs.c
+SRC_FILES += $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_uart.c
+SRC_FILES += $(SDK_ROOT)/modules/nrfx/drivers/src/nrfx_uarte.c
+SRC_FILES += $(SDK_ROOT)/modules/nrfx/mdk/system_nrf52840.c
+SRC_FILES += ../ble_dtm/ble_dtm_hw_nrf52.c
+SRC_FILES += ../ble_dtm/ble_dtm.c
+SRC_FILES += ../syscalls.c
+SRC_FILES += ../main.c
 
-# Include folders common to all targets
-INC_FOLDERS += \
-  $(SDK_ROOT)/components \
-  $(SDK_ROOT)/modules/nrfx/mdk \
-  $(PROJ_DIR) \
-  $(PROJ_DIR)/ble_dtm \
-  $(SDK_ROOT)/components/libraries/fifo \
-  $(SDK_ROOT)/components/libraries/strerror \
-  $(SDK_ROOT)/components/toolchain/cmsis/include \
-  $(SDK_ROOT)/components/ble/ble_dtm \
-  $(SDK_ROOT)/components/libraries/util \
-  . \
-  $(SDK_ROOT)/components/libraries/balloc \
-  $(SDK_ROOT)/components/libraries/ringbuf \
-  $(SDK_ROOT)/modules/nrfx/hal \
-  $(SDK_ROOT)/components/libraries/bsp \
-  $(SDK_ROOT)/components/libraries/uart \
-  $(SDK_ROOT)/components/libraries/log \
-  $(SDK_ROOT)/modules/nrfx \
-  $(SDK_ROOT)/components/libraries/experimental_section_vars \
-  $(SDK_ROOT)/integration/nrfx/legacy \
-  $(SDK_ROOT)/integration/nrfx \
-  $(SDK_ROOT)/components/drivers_nrf/nrf_soc_nosd \
-  $(SDK_ROOT)/components/libraries/atomic \
-  $(SDK_ROOT)/components/boards \
-  $(SDK_ROOT)/components/libraries/memobj \
-  $(SDK_ROOT)/modules/nrfx/drivers/include \
-  $(SDK_ROOT)/external/fprintf \
-  $(SDK_ROOT)/components/libraries/log/src \
-  $(SDK_ROOT)/components/libraries/delay \
+INC_FOLDERS := $(SDK_ROOT)/components
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/fifo
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/strerror
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/balloc
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/ringbuf
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/bsp
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/uart
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/log
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/experimental_section_vars
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/atomic
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/util
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/memobj
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/log/src
+INC_FOLDERS += $(SDK_ROOT)/components/libraries/delay
+INC_FOLDERS += $(SDK_ROOT)/components/drivers_nrf/nrf_soc_nosd
+# INC_FOLDERS += $(SDK_ROOT)/components/ble/ble_dtm
+INC_FOLDERS += $(SDK_ROOT)/components/toolchain/cmsis/include
+INC_FOLDERS += $(SDK_ROOT)/components/boards
+INC_FOLDERS += $(SDK_ROOT)/modules/nrfx/mdk
+INC_FOLDERS += $(SDK_ROOT)/modules/nrfx/hal
+INC_FOLDERS += $(SDK_ROOT)/modules/nrfx
+INC_FOLDERS += $(SDK_ROOT)/modules/nrfx/drivers/include
+INC_FOLDERS += $(SDK_ROOT)/integration/nrfx/legacy
+INC_FOLDERS += $(SDK_ROOT)/integration/nrfx
+INC_FOLDERS += $(SDK_ROOT)/external/fprintf
+INC_FOLDERS += ../ble_dtm
+INC_FOLDERS += ../
+INC_FOLDERS += .
 
-# Libraries common to all targets
-LIB_FILES += \
-
-# Optimization flags
-OPT = -O3 -g3
-# Uncomment the line below to enable link time optimization
-#OPT += -flto
-
-# C flags common to all targets
-CFLAGS += $(OPT)
+CFLAGS += -O3 -g3 
 CFLAGS += -DBOARD_PCA10056
 CFLAGS += -DBSP_DEFINES_ONLY
 CFLAGS += -DCONFIG_GPIO_AS_PINRESET
@@ -87,14 +73,12 @@ CFLAGS += -mcpu=cortex-m4
 CFLAGS += -mthumb -mabi=aapcs
 CFLAGS += -Wall -Werror
 CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
-# keep every function in a separate section, this allows linker to discard unused ones
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing
 CFLAGS += -fno-builtin -fshort-enums
+CFLAGS += $(foreach dir, $(INC_FOLDERS), -I$(dir))
+CFLAGS += -D__HEAP_SIZE=8192
+CFLAGS += -D__STACK_SIZE=8192
 
-# C++ flags common to all targets
-CXXFLAGS += $(OPT)
-
-# Assembler flags common to all targets
 ASMFLAGS += -g3
 ASMFLAGS += -mcpu=cortex-m4
 ASMFLAGS += -mthumb -mabi=aapcs
@@ -104,58 +88,62 @@ ASMFLAGS += -DBSP_DEFINES_ONLY
 ASMFLAGS += -DCONFIG_GPIO_AS_PINRESET
 ASMFLAGS += -DFLOAT_ABI_HARD
 ASMFLAGS += -DNRF52840_XXAA
+ASMFLAGS += -D__HEAP_SIZE=8192
+ASMFLAGS += -D__STACK_SIZE=8192
 
-# Linker flags
-LDFLAGS += $(OPT)
+LDFLAGS += -O3 -g3 
 LDFLAGS += -mthumb -mabi=aapcs -L$(SDK_ROOT)/modules/nrfx/mdk -T$(LINKER_SCRIPT)
 LDFLAGS += -mcpu=cortex-m4
 LDFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
-# let linker dump unused sections
 LDFLAGS += -Wl,--gc-sections
-# use newlib in nano version
 LDFLAGS += --specs=nano.specs
 
-nrf52840_xxaa: CFLAGS += -D__HEAP_SIZE=8192
-nrf52840_xxaa: CFLAGS += -D__STACK_SIZE=8192
-nrf52840_xxaa: ASMFLAGS += -D__HEAP_SIZE=8192
-nrf52840_xxaa: ASMFLAGS += -D__STACK_SIZE=8192
+#SRC_FILES := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+#OBJ_FILES := $(addprefix $(OUTPUT_DIRECTORY)/, $(notdir $(SRC_FILES:.c=.o)))
+#vpath %.c $(SRC_DIRS)
 
-# Add standard libraries at the very end of the linker input, after all objects
-# that may need symbols provided by these libraries.
-LIB_FILES += -lc -lnosys -lm
+C_SRC_FILES := $(filter %.c, $(SRC_FILES))
+S_SRC_FILES := $(filter %.S, $(SRC_FILES))
+
+OBJ_C_FILES := $(addprefix $(OUTPUT_DIRECTORY)/, $(notdir $(C_SRC_FILES:.c=.o)))
+OBJ_S_FILES := $(addprefix $(OUTPUT_DIRECTORY)/, $(notdir $(S_SRC_FILES:.S=.o)))
+
+OBJ_FILES := $(OBJ_S_FILES) $(OBJ_C_FILES)
+vpath %.c $(sort $(dir $(C_SRC_FILES)))
+vpath %.S $(sort $(dir $(S_SRC_FILES)))
+
+CC      := arm-none-eabi-gcc
+CXX     := arm-none-eabi-c++
+AS      := arm-none-eabi-as
+AR      := arm-none-eabi-ar -r
+LD      := arm-none-eabi-ld
+NM      := arm-none-eabi-nm
+OBJDUMP := arm-none-eabi-objdump
+OBJCOPY := arm-none-eabi-objcopy
+SIZE    := arm-none-eabi-size
 
 
-.PHONY: default help
+all: $(OUTPUT_DIRECTORY) $(TARGETS).elf
 
-# Default target - first one defined
-default: nrf52840_xxaa
+$(OUTPUT_DIRECTORY):
+	@if [ ! -d "$@" ]; then mkdir -p "$@"; fi
 
-# Print all targets that can be built
-help:
-	@echo following targets are available:
-	@echo		nrf52840_xxaa
-	@echo		sdk_config - starting external tool for editing sdk_config.h
-	@echo		flash      - flashing binary
+$(TARGETS).elf: $(OBJ_FILES)
+	@echo Building target: $@
+	@echo Invoking: ARM v7 Linux gcc linker
+	@$(CC) -o $@ $^ $(LDFLAGS)
+	@$(OBJCOPY) -O ihex $@ $(TARGETS).hex
+	@echo Finished building target: $@
+	@$(SIZE) $@
 
-TEMPLATE_PATH := $(SDK_ROOT)/components/toolchain/gcc
+$(OUTPUT_DIRECTORY)/%.o: %.c
+	@echo 'Compiling C file: $<'
+	@$(CC) $(CFLAGS) -c $< -o $@
 
+$(OUTPUT_DIRECTORY)/%.o: %.S
+	@echo 'Assembling file: $<'
+	@$(CC) $(ASMFLAGS) -c $< -o $@
 
-include $(TEMPLATE_PATH)/Makefile.common
-
-$(foreach target, $(TARGETS), $(call define_target, $(target)))
-
-.PHONY: flash erase
-
-# Flash the program
-flash: default
-	@echo Flashing: $(OUTPUT_DIRECTORY)/nrf52840_xxaa.hex
-	nrfjprog -f nrf52 --program $(OUTPUT_DIRECTORY)/nrf52840_xxaa.hex --sectorerase
-	nrfjprog -f nrf52 --reset
-
-erase:
-	nrfjprog -f nrf52 --eraseall
-
-SDK_CONFIG_FILE := ../config/sdk_config.h
-CMSIS_CONFIG_TOOL := $(SDK_ROOT)/external_tools/cmsisconfig/CMSIS_Configuration_Wizard.jar
-sdk_config:
-	java -jar $(CMSIS_CONFIG_TOOL) $(SDK_CONFIG_FILE)
+clean:
+	@echo "Removing output folder ..."
+	@rm -rf $(OUTPUT_DIRECTORY) $(TARGETS)
