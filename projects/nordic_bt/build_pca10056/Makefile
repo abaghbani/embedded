@@ -1,7 +1,7 @@
 TARGETS          := output
 OUTPUT_DIRECTORY := _build
 
-SDK_ROOT := /home/akbar/sdk/nRF5_SDK_17.1
+SDK_ROOT := /home/akbar/sdk/nRF5_SDK
 
 LINKER_SCRIPT := direct_test_mode_gcc_nrf52.ld
 
@@ -49,7 +49,6 @@ INC_FOLDERS += $(SDK_ROOT)/components/libraries/memobj
 INC_FOLDERS += $(SDK_ROOT)/components/libraries/log/src
 INC_FOLDERS += $(SDK_ROOT)/components/libraries/delay
 INC_FOLDERS += $(SDK_ROOT)/components/drivers_nrf/nrf_soc_nosd
-# INC_FOLDERS += $(SDK_ROOT)/components/ble/ble_dtm
 INC_FOLDERS += $(SDK_ROOT)/components/toolchain/cmsis/include
 INC_FOLDERS += $(SDK_ROOT)/components/boards
 INC_FOLDERS += $(SDK_ROOT)/modules/nrfx/mdk
@@ -146,4 +145,4 @@ $(OUTPUT_DIRECTORY)/%.o: %.S
 
 clean:
 	@echo "Removing output folder ..."
-	@rm -rf $(OUTPUT_DIRECTORY) $(TARGETS)
+	@rm -rf $(OUTPUT_DIRECTORY) $(TARGETS).*
