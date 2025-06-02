@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
-include(/home/akbar/sdk/pico-sdk/external/pico_sdk_import.cmake)
+set(PICO_SDK_PATH "/home/akbar/sdk/pico-sdk")
+include(${PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 
 # Name of the project
 project(blinky C CXX ASM)
