@@ -6,19 +6,25 @@ SDK_ROOT := /home/akbar/sdk/gecko_sdk
 SRC_FILES := $(SDK_ROOT)/platform/Device/SiliconLabs/EFM32LG/Source/GCC/startup_efm32lg.S
 SRC_FILES += $(SDK_ROOT)/platform/Device/SiliconLabs/EFM32LG/Source/startup_efm32lg.c
 SRC_FILES += $(SDK_ROOT)/platform/Device/SiliconLabs/EFM32LG/Source/system_efm32lg.c
+SRC_FILES += $(SDK_ROOT)/platform/emlib/src/em_system.c
 SRC_FILES += $(SDK_ROOT)/platform/emlib/src/em_cmu.c
+SRC_FILES += $(SDK_ROOT)/platform/emlib/src/em_core.c
 SRC_FILES += $(SDK_ROOT)/platform/emlib/src/em_gpio.c
+SRC_FILES += ../mystartup.c
 SRC_FILES += ../main.c
 
 INC_FOLDERS := $(SDK_ROOT)/platform/Device/SiliconLabs/EFM32LG/Include
+INC_FOLDERS += $(SDK_ROOT)/platform/CMSIS/Core/Include
 INC_FOLDERS += $(SDK_ROOT)/platform/emlib/inc
+INC_FOLDERS += $(SDK_ROOT)/platform/common/inc
 INC_FOLDERS += ../
 
 FLAGS := -O3 -g3 
 FLAGS += -mcpu=cortex-m3
 FLAGS += -mthumb -mabi=aapcs
 FLAGS += -Wall -Werror
-FLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
+# FLAGS += -DEFM32LG330F256
+FLAGS += -DPART_EFM32LG330F256 -DEFM32LG330F256
 
 CFLAGS := $(FLAGS)
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing
@@ -28,7 +34,9 @@ CFLAGS += $(foreach dir, $(INC_FOLDERS), -I$(dir))
 LDFLAGS := $(FLAGS) 
 LDFLAGS += -L$(SDK_ROOT)/platform/Device/SiliconLabs/EFM32LG/Source/GCC -Tefm32lg.ld
 LDFLAGS += -Wl,--gc-sections
-LDFLAGS += --specs=nano.specs
+# LDFLAGS += --specs=nano.specs
+# LDFLAGS += -nostartfiles -Wl,--gc-sections
+
 
 C_SRC_FILES := $(filter %.c, $(SRC_FILES))
 S_SRC_FILES := $(filter %.S, $(SRC_FILES))
@@ -62,6 +70,7 @@ $(TARGETS).elf: $(OBJ_FILES)
 	@$(CC) -o $@ $^ $(LDFLAGS)
 	@$(OBJCOPY) -O ihex $@ $(TARGETS).hex
 	@echo Finished building target: $@
+	@$(OBJCOPY) -O binary $@ $(TARGETS).bin
 	@$(SIZE) $@
 
 $(OUTPUT_DIRECTORY)/%.o: %.c
