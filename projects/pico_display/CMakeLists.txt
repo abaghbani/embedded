@@ -22,12 +22,19 @@ add_library(pico_st7789 INTERFACE)
 target_sources(pico_st7789 INTERFACE ../../lib/st7789/st7789.c)
 target_include_directories(pico_st7789 INTERFACE ../../lib/st7789)
 
+add_library(pico_itap INTERFACE)
+target_sources(pico_itap INTERFACE ../../lib/itap/itap.c)
+target_include_directories(pico_itap INTERFACE ../../lib/itap)
+
 pico_sdk_init()
 
 target_link_libraries(${PROJECT_NAME}
 	pico_stdlib
 	hardware_spi
+	hardware_pwm
+	hardware_adc
 	pico_st7789
+	pico_itap
 )
 
 
